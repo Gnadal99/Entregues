@@ -62,7 +62,9 @@ namespace WindowsFormsApplication1
 
 
             }
-            else
+
+            
+            else if (altura.Checked)
             {
                 string mensaje = "3/" + nombre.Text + "/" + alturaBox.Text;
                 // Enviamos al servidor el nombre tecleado
@@ -77,6 +79,44 @@ namespace WindowsFormsApplication1
 
 
                 MessageBox.Show(mensaje);
+            }
+
+            else if (Palindromo.Checked)
+            {
+                string mensaje = "4/" + nombre.Text;
+                // Enviamos al servidor el nombre tecleado
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                server.Send(msg);
+
+                //Recibimos la respuesta del servidor
+                byte[] msg2 = new byte[80];
+                server.Receive(msg2);
+                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+
+
+                if (mensaje == "SI")
+                    MessageBox.Show("Tu nombre es palíndromo.");
+                else
+                    MessageBox.Show("Tu nombre no es palindromo.");
+                
+            }
+
+            else if (mayusculas.Checked)
+            {
+                string mensaje = "5/" + nombre.Text;
+                // Enviamos al servidor el nombre tecleado
+                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                server.Send(msg);
+
+                //Recibimos la respuesta del servidor
+                byte[] msg2 = new byte[80];
+                server.Receive(msg2);
+                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+
+
+                MessageBox.Show("Tu nombre es palíndromo.");
+               
+
             }
          
 
@@ -131,6 +171,8 @@ namespace WindowsFormsApplication1
 
 
         }
+
+        
 
    
 

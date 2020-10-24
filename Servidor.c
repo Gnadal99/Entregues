@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
 						strcpy (respuesta,"NO");
 					}
 			}
-			else  //quiere saber si es alto
+			else  if (codigo ==3)//quiere saber si es alto
 			{
 					p = strtok( NULL, "/");
 					float altura =  atof (p);
@@ -108,7 +108,50 @@ int main(int argc, char *argv[])
 					else
 						sprintf (respuesta, "%s: eresbajo",nombre);
 			}
+				
+			else  if (codigo ==4)//palindromo
+			{		
+					
+				int pal = 1;
+				int lenn = strlen(nombre);
+				strupr(nombre);
+				if (lenn % 2 == 0)
+				{
+					for (int i = 1 ; i <= lenn / 2 ; i++)
+					{
+						if (nombre[i] != nombre[lenn+1-i])
+							pal = 0;
+					}
+				}
+				if (lenn % 2 == 1)
+				{
+					for (int i = 1 ; i <= (lenn -1)/2 ; i++)
+					{
+						if (nombre[i] != nombre[lenn+1-i])
+							pal = 0;
+					}
 						
+				}
+				if (pal == 1)
+				{
+					strcpy (respuesta,"SI");
+				}
+				else
+					strcpy (respuesta,"NO");
+					
+					
+			}				
+			
+			else  if (codigo ==5)//mayusculas
+			{		
+					
+				int pal = 1;
+				int lenn = strlen(nombre);
+				strupr(nombre);
+				strcpy (respuesta, nombre);
+				
+					
+			}				
 				
 			if (codigo !=0)
 			{
