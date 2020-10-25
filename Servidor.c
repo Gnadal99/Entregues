@@ -5,6 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <stdio.h>
+#include <ctype.h>
 
 
 
@@ -114,20 +115,24 @@ int main(int argc, char *argv[])
 					
 				int pal = 1;
 				int lenn = strlen(nombre);
-				strupr(nombre);
+				for (int l = 0; nombre[l] != '\0'; l = l + 1)
+				{
+					nombre[l] = toupper(nombre[l]);
+				}
+				
 				if (lenn % 2 == 0)
 				{
-					for (int i = 1 ; i <= lenn / 2 ; i++)
+					for (int i = 0 ; i <= (lenn-1) / 2 ; i++)
 					{
-						if (nombre[i] != nombre[lenn+1-i])
+						if (nombre[i] != nombre[lenn-1-i])
 							pal = 0;
 					}
 				}
 				if (lenn % 2 == 1)
 				{
-					for (int i = 1 ; i <= (lenn -1)/2 ; i++)
+					for (int i = 0 ; i <= (lenn -2)/2 ; i++)
 					{
-						if (nombre[i] != nombre[lenn+1-i])
+						if (nombre[i] != nombre[lenn-1-i])
 							pal = 0;
 					}
 						
@@ -147,7 +152,10 @@ int main(int argc, char *argv[])
 					
 				int pal = 1;
 				int lenn = strlen(nombre);
-				strupr(nombre);
+				for (int l = 0; nombre[l] != '\0'; l = l + 1)
+				{
+					nombre[l] = toupper(nombre[l]);
+				}
 				strcpy (respuesta, nombre);
 				
 					
