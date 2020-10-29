@@ -67,15 +67,15 @@ int main(int argc, char *argv[])
 			
 			int codigo =  atoi (p);
 			// Ya tenemos el c?digo de petici?n
-			char nombre[20];
+			float temp2;
+			float temp;
 			
 			if (codigo !=0)
 			{
 				p = strtok( NULL, "/");
 
-				strcpy (nombre, p);
-				// Ya tenemos el nombre
-				printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
+				temp = atoi(p);
+				// Ya tenemos la temperatura entrada
 			}
 			
 			if (codigo == 0)
@@ -83,83 +83,18 @@ int main(int argc, char *argv[])
 				terminar=1;
 			}
 		
-			if (codigo ==1) //piden la longitd del nombre
+			else if (codigo ==1) //nos dan Celsius
 			{
-				sprintf (respuesta,"%ld",strlen (nombre));
+				temp2 = temp*1.8 + 32;
+				sprintf (respuesta,"%f",temp2);
 			}
 			
-			else if (codigo ==2)
+			else if (codigo ==2) // nos dan Fahrenheit
 			{
-					// quieren saber si el nombre es bonito
-					if((nombre[0]=='M') || (nombre[0]=='S'))
-					{
-						strcpy (respuesta,"SI");
-					}
-					else
-					{
-						strcpy (respuesta,"NO");
-					}
+				temp2 = (temp - 32)/1.8;
+				sprintf (respuesta,"%f",temp2);
 			}
-			else  if (codigo ==3)//quiere saber si es alto
-			{
-					p = strtok( NULL, "/");
-					float altura =  atof (p);
-					if (altura > 1.70)
-						sprintf (respuesta, "%s: eres alto",nombre);
-					else
-						sprintf (respuesta, "%s: eresbajo",nombre);
-			}
-				
-			else  if (codigo ==4)//palindromo
-			{		
 					
-				int pal = 1;
-				int lenn = strlen(nombre);
-				for (int l = 0; nombre[l] != '\0'; l = l + 1)
-				{
-					nombre[l] = toupper(nombre[l]);
-				}
-				
-				if (lenn % 2 == 0)
-				{
-					for (int i = 0 ; i <= (lenn-1) / 2 ; i++)
-					{
-						if (nombre[i] != nombre[lenn-1-i])
-							pal = 0;
-					}
-				}
-				if (lenn % 2 == 1)
-				{
-					for (int i = 0 ; i <= (lenn -2)/2 ; i++)
-					{
-						if (nombre[i] != nombre[lenn-1-i])
-							pal = 0;
-					}
-						
-				}
-				if (pal == 1)
-				{
-					strcpy (respuesta,"SI");
-				}
-				else
-					strcpy (respuesta,"NO");
-					
-					
-			}				
-			
-			else  if (codigo ==5)//mayusculas
-			{		
-					
-				int pal = 1;
-				int lenn = strlen(nombre);
-				for (int l = 0; nombre[l] != '\0'; l = l + 1)
-				{
-					nombre[l] = toupper(nombre[l]);
-				}
-				strcpy (respuesta, nombre);
-				
-					
-			}				
 				
 			if (codigo !=0)
 			{
