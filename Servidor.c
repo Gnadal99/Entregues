@@ -9,7 +9,9 @@
 #include <pthread.h>
 
 int contador;
-pthread_mutex mutex = PTHREAD_MUTEX_INITIALIZER;
+int i;
+int sockets[100];
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void *AtenderCliente (void *socket)
 {
@@ -58,12 +60,11 @@ void *AtenderCliente (void *socket)
 			terminar=1;
 		}
 		
-		else if (codigo == 6)
-			sprintf (respuesta,"%d",contador);
+		
 		
 		else if (codigo ==1) //piden la longitd del nombre
 		{
-			sprintf (respuesta,"%ld",strlen (nombre));
+			sprintf (respuesta,"1/%ld",strlen (nombre));
 		}
 		
 		else if (codigo ==2)
@@ -71,11 +72,11 @@ void *AtenderCliente (void *socket)
 			// quieren saber si el nombre es bonito
 			if((nombre[0]=='M') || (nombre[0]=='S'))
 			{
-				strcpy (respuesta,"SI");
+				strcpy (respuesta,"2/SI");
 			}
 			else
 			{
-				strcpy (respuesta,"NO");
+				strcpy (respuesta,"2/NO");
 			}
 		}
 		else  if (codigo ==3)//quiere saber si es alto
@@ -83,9 +84,9 @@ void *AtenderCliente (void *socket)
 			p = strtok( NULL, "/");
 			float altura =  atof (p);
 			if (altura > 1.70)
-				sprintf (respuesta, "%s: eres alto",nombre);
+				sprintf (respuesta, "3/%s: eres alto",nombre);
 			else
-				sprintf (respuesta, "%s: eresbajo",nombre);
+				sprintf (respuesta, "3/%s: eres bajo",nombre);
 		}
 		
 		else  if (codigo ==4)//palindromo
@@ -117,10 +118,10 @@ void *AtenderCliente (void *socket)
 			}
 			if (pal == 1)
 			{
-				strcpy (respuesta,"SI");
+				strcpy (respuesta,"4/SI");
 			}
 			else
-				strcpy (respuesta,"NO");
+				strcpy (respuesta,"4/NO");
 			
 			
 		}				
@@ -134,13 +135,7 @@ void *AtenderCliente (void *socket)
 			{
 				nombre[l] = toupper(nombre[l]);
 			}
-			strcpy (respuesta, nombre);
-			
-			
-		}
-		
-		else if (codigo == 6){
-			//Cuantos servicios
+			sprintf (respuesta,"5/%s", nombre);
 			
 		}
 		
@@ -157,6 +152,12 @@ void *AtenderCliente (void *socket)
 			pthread_mutex_lock( &mutex );
 			contador = contador +1;
 			pthread_mutex_unlock( &mutex );
+			//notificar a todos los conectados
+			char notificacion[20];
+			sprintf (notificacion, "6/%d",contador);
+			int j;
+			for (j=0; j<i; j++)
+				write (sockets[j], notificacion, strlen(notificacion));
 		}
 		
 	}
@@ -191,11 +192,11 @@ int main(int argc, char *argv[])
 	if (listen(sock_listen, 3) < 0)
 		printf("Error en el Listen");
 	
-	int i;
-	int sockets[100];
+	
 	pthread_t thread[100];
+	i=0;
 
-	for (i=0;i<5;i++){
+	for (;;){
 		printf ("Escuchando\n");
 		
 		sock_conn = accept(sock_listen, NULL, NULL);
@@ -206,5 +207,6 @@ int main(int argc, char *argv[])
 		
 		//Crear thread y decirle lo que tiene que hacer
 		pthread_create (&thread[i], NULL, AtenderCliente, &sockets[i]);
+		i++;
 	}
 }

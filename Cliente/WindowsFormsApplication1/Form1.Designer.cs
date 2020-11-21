@@ -39,7 +39,6 @@
             this.Longitud = new System.Windows.Forms.RadioButton();
             this.Bonito = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -94,7 +93,7 @@
             // 
             this.Palindromo.AutoSize = true;
             this.Palindromo.Location = new System.Drawing.Point(115, 136);
-            this.Palindromo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Palindromo.Margin = new System.Windows.Forms.Padding(2);
             this.Palindromo.Name = "Palindromo";
             this.Palindromo.Size = new System.Drawing.Size(180, 17);
             this.Palindromo.TabIndex = 12;
@@ -106,7 +105,7 @@
             // 
             this.mayusculas.AutoSize = true;
             this.mayusculas.Location = new System.Drawing.Point(115, 158);
-            this.mayusculas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.mayusculas.Margin = new System.Windows.Forms.Padding(2);
             this.mayusculas.Name = "mayusculas";
             this.mayusculas.Size = new System.Drawing.Size(209, 17);
             this.mayusculas.TabIndex = 11;
@@ -157,23 +156,13 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(12, 72);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 36);
             this.button1.TabIndex = 7;
             this.button1.Text = "Conectar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(507, 145);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 43);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "¿Cuántos servicios?";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // label1
             // 
@@ -188,7 +177,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(741, 562);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
@@ -213,7 +201,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RadioButton Palindromo;
         private System.Windows.Forms.RadioButton mayusculas;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
     }
 }
